@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix-Signup</title>
     <link rel="stylesheet" href="index.css">
+    <script src="https://kit.fontawesome.com/6ea4f9ea4a.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -30,17 +31,21 @@
             <div class="box">
                 <div class="box-heading">
                     <h1>Sign In</h1>
-                    <form class="login-details" action="../Second/netflix_2.html" method="post"
-                     onsubmit="return validated()"
+                    <form class="login-details" method="post"
+                     onsubmit="validate(event)";
                      name="form">
                         <div class="search">
-                            <input class="email-input" id="input-text" type="text" placeholder="Email or phone number" name="email">
-                            <div id="email_error" class="error email-text">Please enter a valid email address or phone number</div>
+                            <input class="email-input" id="input-text" type="text" placeholder="Email" name="email">
+                            <div id="email_error" class="error email-text">Please enter a valid email address</div>
                             
                             <input class="password" id="input-password" type="password" placeholder="Password" name="password">   
-                            <div id="pass_error" class="error pass-text">Your password must contain between 4 and 60 characters.</div>  
+                            <i class="fa-solid fa-eye" id="togglePassword" style="position: absolute;
+                            right: 72px;
+                            top: 207px;
+                            font-size: 18px;"></i>
+                            <div id="pass_error" class="error pass-text">Atleast 8 characters, 1 no & 1 capital letter is required</div>  
 
-                            <button  class="btn">Sign up</button> 
+                            <button type="submit" class="btn">Sign up</button> 
                         </div>
                     </form>
                 </div>

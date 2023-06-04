@@ -122,8 +122,6 @@ input{
     display: none;
 
 }
-
-
 .btn{
     
     background-color: #e50914;
@@ -138,6 +136,7 @@ input{
     font-size: 1.2rem;
     font-weight: bold;
     text-decoration: none;
+    cursor: pointer;
 }
 
 

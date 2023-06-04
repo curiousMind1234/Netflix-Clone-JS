@@ -1,18 +1,9 @@
 
-const email = document.forms['form']['email'];
-const password = document.forms['form']['password'];
+const email = document.getElementById("input-text");
+const password = document.getElementById("input-password");
 
 const email_error = document.querySelector('.email-text');
 const pass_error = document.querySelector('.pass-text');
-
-
-
-email.addEventListener('textInput', email_Verify);
-password.addEventListener('textInput', pass_Verify);
-
-
-email.addEventListener("keyup", validated);
-password.addEventListener("keyup", validated);
 
 document.getElementById("input-text").onclick = function() {
     this.value = '';
@@ -23,31 +14,80 @@ document.getElementById("input-password").onclick = function() {
     this.style.color = 'white';
 }
 
-function validated(){  
-    if(email.value.length < 9){
+
+email.addEventListener('textInput', emailVerify);
+password.addEventListener('textInput', passVerify);
+
+
+function emailVerify() {
+    const emailRegx = /^\S+@\S+\.\S+$/;
+    let emailVal = email.value;
+    if(!emailVal.match(emailRegx)) {
         email_error.style.display = "block";
         email.focus();
         return false;
+       
+    } else {
+        email_error.style.display = "none"; 
+        return true; 
     }
-    if(password.value.length < 6){  
+}
+
+function passVerify() {
+    const passwordCapRegx = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    let passVal = password.value;
+    if(!passVal.match(passwordCapRegx)) {
         pass_error.style.display = "block";
         password.focus();
-        return false;  
+        return false;
+    } else {
+        pass_error.style.display = "none";
+        return true;        
+    }   
+}
+
+function showPassword(){
+    let toggle = document.querySelector("#togglePassword");
+    toggle.addEventListener("click",()=>{
+        const type = password.getAttribute("type");
+        if(type === "password"){
+            password.setAttribute("type", "text");
+            toggle.classList.remove("fa-eye")
+            toggle.classList.add("fa-eye-slash")
+        }
+        else{
+            password.setAttribute("type", "password");
+            toggle.classList.remove("fa-eye-slash");
+            toggle.classList.add("fa-eye")
+        }
+
+    })
+}
+
+showPassword();
+
+function validate(event){
+    event.preventDefault();
+    let emailVal = email.value;
+    let passVal = password.value;
+    try{
+        if (emailVal === "" ) {
+            email_error.style.display = "block";
+            email.focus();
+            return false;
+        }
+        if (passVal === "" ){
+            pass_error.style.display = "block";
+            password.focus();
+            return false;
+        }
+        if(emailVerify && passVerify) {
+            window.location = "../Second/netflix_2.html";
+            return true;
+         }
+         return false;
     }
-    return true;
+    catch(err){
+        console.log(err)
+    }   
 }
-
-function email_Verify(){
-    if (email.value.length >= 8) {
-		email_error.style.display = "none";
-		return true;
-	}
-}
-
-function pass_Verify(){
-	if (password.value.length >= 5) {
-		pass_error.style.display = "none";
-		return true;
-	}
-}
-
